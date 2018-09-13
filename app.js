@@ -16,12 +16,24 @@ class NameGenerator {
         //This syntax will use the function in the class but it'll execute it immediately 
         //btn.addEventListener('click', this.addName);
         //this syntax will add the reference of the function so that when a click event occures the listener will know to what address it goes, and it works fine but in some cases not
-        var this.names = ["Adel","Smail","Younes","Chemso"];
-        //This syntax allow names to be an attribut of the class event though it's defined in a function (constructor in this case) 
+        this.names = ["Adel","Smail","Younes","Chemso"];
+        this.currentName = 0;
+        console.log(this);
+        //This syntax allow names and currentName to be an attribut of the class event though it's defined in a function (constructor in this case) 
+        btn.addEventListener('click', this.addName.bind(this));
+        //To fix the "this" refering to button in addName we use bind() that defines it's behavior; in this case we're telling it to behave as "this" in this function does
+        //if we want to add another class it should be instantiated i.e bind() taes objects and not classes       
     }
     
     addName() {
-        const name = new NameField("Max");
+        
+        console.log(this);
+        //This is defined in JS to refer to the caller of the function it is contained in so in this case the caller of addName is the eventListener So this refers to the button
+        const name = new NameField(this.names[this.currentName]);
+        this.currentName++;
+        if(this.currentName >= this.names.length) {
+            this.currentName = 0;
+        }
     }
 }
 
