@@ -20,9 +20,15 @@ class NameGenerator {
         this.currentName = 0;
         console.log(this);
         //This syntax allow names and currentName to be an attribut of the class event though it's defined in a function (constructor in this case) 
-        btn.addEventListener('click', this.addName.bind(this));
+        //btn.addEventListener('click', this.addName.bind(this));
         //To fix the "this" refering to button in addName we use bind() that defines it's behavior; in this case we're telling it to behave as "this" in this function does
-        //if we want to add another class it should be instantiated i.e bind() taes objects and not classes       
+        //if we want to add another class it should be instantiated i.e bind() taes objects and not classes     
+        const adel = () => {
+            this.addName();
+        }
+        btn.addEventListener('click', adel);
+        //Or we can use in arrow function that doesn't implement "this" so we'll use the current function "this"
+        //This time we want to execute the function addName it is not an event so we must ad parentheses 
     }
     
     addName() {
